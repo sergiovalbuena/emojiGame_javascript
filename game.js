@@ -28,16 +28,26 @@ function startGame() {
   game.font = elementsSize + 'px Verdana';
   game.textAlign = 'end';
 
-  const map = maps[2];
-  const mapRows  = map.trim().split('\n');
-  const mapRowsCols = mapRows.map(row => row.trim().split(''));
+  const map = maps[2]; 
+  const mapRows  = map.trim().split('\n'); //un str de cada fila y lo pase a un []
+  const mapRowsCols = mapRows.map(row => row.trim().split(''));  //limpiar con trim, crear un elemento nuevo 
   console.log({ map, mapRows, mapRowsCols });
-  console.log(mapRowsCols[0][1]);
- 
 
-  for (let row = 1; row <= 10; row++) {
-    for (let col = 0; col <= 10; col++) {
-      game.fillText(emojis[mapRowsCols[row - 1][col - 1]], elementsSize * col, elementsSize * row);
-    }
-  }
+
+  mapRowsCols.forEach((row, rowI) => {
+    row.forEach((col, colI) => {
+      const emoji = emojis[col];
+      const posX =  elementsSize * (colI + 1);
+      const posY =  elementsSize * (rowI + 1);
+      game.fillText(emoji, posX, posY);
+      console.log({row, rowI, col, colI});
+    });
+  });
+ 
+  //ciclo anidado para los bidim[]
+  // for (let row = 1; row <= 10; row++) {
+  //   for (let col = 0; col <= 10; col++) {
+  //     game.fillText(emojis[mapRowsCols[row - 1][col - 1]], elementsSize * col, elementsSize * row);
+  //   }
+  // }
 }
